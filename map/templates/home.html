@@ -1,0 +1,58 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<h1> Map Home</h1>
+<li class="list-group-item list-group-item-light">
+<h4 class="stat-title">Dijkstra Function:</h4>
+<form action="/dijkstra">
+  <button id="stat-btn" class="btn">Run</button>
+</form>
+
+<form action="/test">
+  <button id="stat-btn" class="btn">test</button>
+</form>
+
+<div>{{num}}</div>
+
+<select name="dropdown1">
+  <option selected="selected" disabled>Start:</option>
+  <option value="laidlawS">Laidlaw South</option>
+  <option value="dining">Dining Hall</option>
+  <option value="mount">Mount Olympus</option>
+  <option value="swimming">Swimming Pool</option>
+  <option value="astro">Astroturf</option>
+  </select>
+
+  <select name="dropdown2">
+    <option selected="selected" disabled>End:</option>
+    <option value="laidlawS">Laidlaw South</option>
+    <option value="dining">Dining Hall</option>
+    <option value="mount">Mount Olympus</option>
+    <option value="swimming">Swimming Pool</option>
+    <option value="astro">Astroturf</option>
+    </select>
+
+
+</script>
+</div>
+</form>
+</li>
+<div> 
+  {% load static %} <img src="{% static 'map/media/MerchiMap.jpg' %}" alt="map" style="width:730px;height:600px;">
+</div>
+{% endblock content %}
+
+
+function getSelectValue()
+{
+    selectedValue = document.getElementById("list").value;
+    console.log(selectedValue);
+}
+getSelectValue();
+
+function getSelectValue()
+{
+    selectedValue = document.getElementById("list2").value;
+    console.log(selectedValue);
+}
+getSelectValue();
