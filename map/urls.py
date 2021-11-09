@@ -8,7 +8,6 @@ urlpatterns = [
     path('dijkstra/',views.dijkstra),
     path('collect/',views.collect),
     path('test/',views.test),
-    path('dynamic/',views.dynamic)
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -10,17 +10,18 @@ from .models import MyModel
 def home(request):
     return render(request, 'home.html')
 
-def about(request):
-	return HttpResponse ('<h1> Bad website.... </h1>''<h2> Additionally, chee chee wanted to be on the website so here is here shoutout </h2>')
 
-def dynamic(request):
-    return render(request, 'dynamic.html')
+def about(request):
+    return HttpResponse(
+        '<h1> Bad website.... </h1>''<h2> Additionally, chee chee wanted to be on the website so here is here shoutout </h2>')
+
 
 def collect(request):
     url = "http://127.0.0.1:8000/"
     response = urllib.request.urlopen(url)
     data = json.loads(response.read())
-    return HttpResponse (data)
+    return HttpResponse(data)
+
 
 def saveCriteria(request):
     if request.method == "POST":
@@ -29,24 +30,27 @@ def saveCriteria(request):
         print(title)
     return render(request, "test.html", context)
 
+
 def test(request):
     return render(request, 'test.html')
 
-def save_values(request):
-    src = request.GET['dropdown1'] 
-    dest = request.GET['dropdown2'] 
 
-    return render(request, home.html)
-    
+def save_values(request):
+    src = request.GET['dropdown1']
+    dest = request.GET['dropdown2']
+
+    return render(request, 'home.html')
 
 
 def dijkstra(request, graph, src, dest, visited=[], distances={}, predecessors={}):
-    graph = {'laidlawS': {'swimming': 100, 'astro': 100, 'mount': 135},
-             'mount': {'laidlawS': 135, 'dining': 85},
-             'swimming': {'laidlawS': 100},
-             'astro': {'laidlawS': 100},
-             'dining': {'mount': 85}
-             }
+    request.session[src] = 'LadlawS'
+    request.session[dest] = 'dining'
+    request.session[graph] = {'laidlawS': {'swimming': 100, 'astro': 100, 'mount': 135},
+                              'mount': {'laidlawS': 135, 'dining': 85},
+                              'swimming': {'laidlawS': 100},
+                              'astro': {'laidlawS': 100},
+                              'dining': {'mount': 85}
+                              }
 
     # a few error prevention checks
     if src not in graph:
@@ -64,7 +68,7 @@ def dijkstra(request, graph, src, dest, visited=[], distances={}, predecessors={
         # reverses the array
         readable = path[0]
         for i in range(1, len(path)): readable = path[i] + ' ---> ' + readable
-        time = distances[dest]//1.4
+        time = distances[dest] // 1.4
         # prints it
         print('shortest path: ' + str(path))
         print("Directions: " + readable)
@@ -94,7 +98,6 @@ def dijkstra(request, graph, src, dest, visited=[], distances={}, predecessors={
         dijkstra(graph, x, dest, visited, distances, predecessors)
 
 
-
 if __name__ == "__main__":
     graph = {'laidlawS': {'swimming': 100, 'astro': 100, 'mount': 135},
              'mount': {'laidlawS': 135, 'dining': 85},
@@ -102,13 +105,10 @@ if __name__ == "__main__":
              'astro': {'laidlawS': 100},
              'dining': {'mount': 85}
              }
-    
+    src = 'laidlawS'
+    dest = 'dining'
+
     dijkstra(graph, src, dest)
 
-        
-
-
-
-
-#"""<html><script>window.location.replace('/');</script></html>"""
-#dijkstra(graph,x,dest,visited,distances,predecessors)
+# """<html><script>window.location.replace('/');</script></html>"""
+# dijkstra(graph,x,dest,visited,distances,predecessors)
