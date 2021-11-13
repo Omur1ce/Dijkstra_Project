@@ -1,13 +1,48 @@
 {% extends "blog/base.html" %}
 {% block content %}
-<form method="POST" action="feedback/send/">
-  <input type="text" name="textfield">
-  <button type="submit">Upload text</button>
+<form role="form" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="dog-names">Choose a dog name:</label>
+    <select name="dog-names" id="dog-names" onchange="getSelectValue">
+      <option value="rigatoni">Rigatoni</option>
+      <option value="dave">Dave</option>
+      <option value="pumpernickel">Pumpernickel</option>
+      <option value="reeses">Reeses</option>
+    </select>
+<!--    <script>-->
+<!--        function getSelectValue()-->
+<!--        {-->
+<!--            var selectedValue = document.getElementById("dog-names").value;-->
+<!--            alert(selectedValue);-->
+<!--        }-->
+<!--        getSelectValue();-->
+<!--    </script>-->
+   <br/>
+    <input id="colour" name="ColourPicker" type="color" value = "{{ current_colour }}"/>
+    <label>Current selected: {{ current_name }}</label>
+  </div>
+  <button type="submit" value="Submit" class="btn btn-info">Submit</button>
 </form>
 
-<form action="/./" method="POST">{% csrf_token %}
-  <input type="text" name="quantity" placeholder="input" size=2>
-  <input type="submit" value="Save!">
-</form>
 {% endblock content%}
+<!--<form role="form" method="post">-->
+<!--  {% csrf_token %}-->
+<!--  <div class="form-group">-->
+<!--    <label for="colour">Choose Start</label>-->
+<!--    <input id="colour" name="colour" type="color" value="{{ current_colour }}"/>-->
+<!--   <br/>-->
+<!--    <label>Current selected: {{current_colour }}</label>-->
+<!--  </div>-->
+<!--  <button type="submit" value="Submit" class="btn btn-info">Submit</button>-->
+<!--</form>-->
 
+<!--<form method="POST" action="feedback/send/">-->
+<!--  <input type="text" name="textfield">-->
+<!--  <button type="submit">Upload text</button>-->
+<!--</form>-->
+
+<!--<form action="/./" method="POST">{% csrf_token %}-->
+<!--  <input type="text" name="quantity" placeholder="input" size=2>-->
+<!--  <input type="submit" value="Save!">-->
+<!--</form>-->
