@@ -1,5 +1,38 @@
 {% extends "blog/base.html" %}
 {% block content %}
+
+
+
+<form>
+    <select>
+        <option selected disabled> Select Colour</option>
+        <option>RED</option>
+        <option>BLUE</option>
+        <option>WHITE</option>
+    </select>
+    <input type="submit" value="Send to DB: ">
+</form>
+
+<label for="ice-cream-choice">Choose a Start Location:</label>
+<input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
+
+<datalist id="ice-cream-flavors">
+    <option value="Chocolate">
+    <option value="Coconut">
+    <option value="Mint">
+    <option value="Strawberry">
+    <option value="Vanilla">
+    <option value="{{ current_name }}">
+</datalist>
+
+<div>
+    <p>Enter your City:</p>
+    <input type="text" list="citylist" placeholder="Search City.." class="form-control" style="width:300px;">
+    <datalist id="citylist">
+    <option value="{{ current.name }}">
+    </datalist>
+</div>
+
 <form role="form" method="post">
   {% csrf_token %}
   <div class="form-group">
@@ -9,23 +42,39 @@
       <option value="dave">Dave</option>
       <option value="pumpernickel">Pumpernickel</option>
       <option value="reeses">Reeses</option>
+      <option value="{{ current_name }}"> {{ current_name }}</option>
     </select>
-<!--    <script>-->
-<!--        function getSelectValue()-->
-<!--        {-->
-<!--            var selectedValue = document.getElementById("dog-names").value;-->
-<!--            alert(selectedValue);-->
-<!--        }-->
-<!--        getSelectValue();-->
-<!--    </script>-->
    <br/>
-    <input id="colour" name="ColourPicker" type="color" value = "{{ current_colour }}"/>
-    <label>Current selected: {{ current_name }}</label>
+    <label>Current dog: {{ current_name }}</label>
   </div>
   <button type="submit" value="Submit" class="btn btn-info">Submit</button>
 </form>
 
+<form role="form" method="post">
+    {% csrf_token %}
+<div class="form-group">
+    <label for="colour">Choose colour</label>
+    <input id="colour" name="colour" type="color" value="{{ current_colour }}"/>
+    <br/>
+    <label>Current selected: {{ current_colour }}</label> I
+</div>
+<button type="submit" value="Submit" class="btn btn-info">Submit</button>
+</form>
+
 {% endblock content%}
+
+<!--<p>Enter your City:</p>-->
+<!--<input type="text" list="citylist" placeholder="Search City.." class="form-control" style="width:300px;">-->
+<!--<datalist id="citylist">-->
+<!--<option value="{{ current.name }}">-->
+<!--</datalist>-->
+
+
+
+
+
+
+
 <!--<form role="form" method="post">-->
 <!--  {% csrf_token %}-->
 <!--  <div class="form-group">-->
@@ -46,3 +95,12 @@
 <!--  <input type="text" name="quantity" placeholder="input" size=2>-->
 <!--  <input type="submit" value="Save!">-->
 <!--</form>-->
+
+<!--    <script>-->
+<!--        function getSelectValue()-->
+<!--        {-->
+<!--            var selectedValue = document.getElementById("dog-names").value;-->
+<!--            alert(selectedValue);-->
+<!--        }-->
+<!--        getSelectValue();-->
+<!--    </script>-->
