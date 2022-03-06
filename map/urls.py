@@ -12,7 +12,11 @@ urlpatterns = [
     path('collect/',views.collect),
     path('test/', cookies_test2),
     path('sus/',views.setcookie),
-    path('zezo/',views.zezo)
+    path('zezo/',views.zezo),
+    path('result/',views.result),
+    path('adder/<int:num>/', views.adder),
+    path('pdf', views.pdf)
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+path('your-name/', views.adder)

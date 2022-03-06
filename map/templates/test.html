@@ -1,37 +1,15 @@
 {% extends "blog/base.html" %}
 {% block content %}
 
-
-
-<form>
-    <select>
-        <option selected disabled> Select Colour</option>
-        <option>RED</option>
-        <option>BLUE</option>
-        <option>WHITE</option>
+<select name="dropdown">
+    <option selected="selected" disabled>Objects on page:</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
     </select>
-    <input type="submit" value="Send to DB: ">
-</form>
-
-<label for="ice-cream-choice">Choose a Start Location:</label>
-<input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
-
-<datalist id="ice-cream-flavors">
-    <option value="Chocolate">
-    <option value="Coconut">
-    <option value="Mint">
-    <option value="Strawberry">
-    <option value="Vanilla">
-    <option value="{{ current_name }}">
-</datalist>
-
-<div>
-    <p>Enter your City:</p>
-    <input type="text" list="citylist" placeholder="Search City.." class="form-control" style="width:300px;">
-    <datalist id="citylist">
-    <option value="{{ current.name }}">
-    </datalist>
-</div>
+    <label>Current selected: {{ current_colour }}</label> I
 
 <form role="form" method="post">
   {% csrf_token %}

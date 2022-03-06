@@ -15,3 +15,8 @@
 
     if form.is_valid():
       answer = form.cleaned_data['value']
+
+
+<form action="/test">
+  <button id="stat-btn" class="btn">test</button>
+</form>

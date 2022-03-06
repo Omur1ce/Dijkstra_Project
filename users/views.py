@@ -17,7 +17,14 @@ def register(request):
 
 def home(request):
 	context = {
-        'user': User.objects.all()
-    }
+        'user': User.objects.all()}
 	return render(request, 'home.html', context)
 
+def profile(request, username):
+	user = User.objects.get(username)
+
+	context = {'user': user}
+	return render(request, 'profile.html', context)
+
+def timetable(request):
+	pass
