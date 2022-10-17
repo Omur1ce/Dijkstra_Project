@@ -20,3 +20,31 @@
 <form action="/test">
   <button id="stat-btn" class="btn">test</button>
 </form>
+
+<script>
+
+
+let destinations = [];
+
+const addDest = (ev)=>{
+ev.preventDefault();  //to stop the form submitting
+let dest = {
+id: Date.now(),
+start: document.getElementById('start').value,
+end: document.getElementById('end').value
+}
+destinations.push(dest);
+document.forms[0].reset(); // to clear the form for the next entries
+//document.querySelector('form').reset();
+//for display purposes only
+console.warn('added' , {destinations} );
+let pre = document.querySelector('#msg pre');
+pre.textContent = '\n' + JSON.stringify(destinations, '\t', 2);
+//saving to localStorage
+localStorage.setItem('MyMovieList', JSON.stringify(destinations) );
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+document.getElementById('btn').addEventListener('click', addDest);
+});
+
+</script>

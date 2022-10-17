@@ -2,7 +2,7 @@
 
 {% extends "blog/base.html" %}
 {% block content %}
-
+{{username}}
 <h1> Map Home</h1>
 <li class="list-group-item list-group-item-light">
 <h4 class="stat-title">Dijkstra Function:</h4>
@@ -12,7 +12,6 @@
 
 
 <form>
-
 <div class="formBox">
 <label for="start"></label>
 <input type="text" id="start" placeholder="Start"/>
@@ -26,59 +25,14 @@
   <button id="stat-btn" class="btn">Run</button>
 </form>
 
-<form action="/collect">
-  <input type="checkbox" id="handicapped" value="-">
-  <label for="handicapped"> Handicapped Route Required?</label><br>
-</form>
-<script>
-
-
-let destinations = [];
-
-const addDest = (ev)=>{
-ev.preventDefault();  //to stop the form submitting
-let dest = {
-id: Date.now(),
-start: document.getElementById('start').value,
-end: document.getElementById('end').value
-}
-destinations.push(dest);
-document.forms[0].reset(); // to clear the form for the next entries
-//document.querySelector('form').reset();
-//for display purposes only
-console.warn('added' , {destinations} );
-let pre = document.querySelector('#msg pre');
-pre.textContent = '\n' + JSON.stringify(destinations, '\t', 2);
-//saving to localStorage
-localStorage.setItem('MyMovieList', JSON.stringify(destinations) );
-}
-document.addEventListener('DOMContentLoaded', ()=>{
-document.getElementById('btn').addEventListener('click', addDest);
-});
-
-</script>
-
-
-
-
 
 </li>
 <div> 
   {% load static %} <img src="{% static 'map/media/MerchiMap.jpg' %}" alt="map" style="width:1000px;height:700px;">
 </div>
+
+
+
 {% endblock content %}
 
 
-function getSelectValue()
-{
-    selectedValue = document.getElementById("list").value;
-    console.log(selectedValue);
-}
-getSelectValue();
-
-function getSelectValue()
-{
-    selectedValue = document.getElementById("list2").value;
-    console.log(selectedValue);
-}
-getSelectValue();

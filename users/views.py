@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+from users.models import SavedRoutes
 from .forms import UserRegisterForm
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 def register(request):
 	if request.method == 'POST':
@@ -19,12 +22,19 @@ def home(request):
 	context = {
         'user': User.objects.all()}
 	return render(request, 'home.html', context)
+	
 
-def profile(request, username):
+@login_required
+def profile2(request, username):
+	
 	user = User.objects.get(username)
 
 	context = {'user': user}
 	return render(request, 'profile.html', context)
+
+@login_required
+def profile(request):
+	return render(request, 'users/profile.html')
 
 def timetable(request):
 	pass

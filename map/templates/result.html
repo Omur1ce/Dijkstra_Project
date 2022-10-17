@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<h1>
+  Directions
+</h1>
+shortest path: ['School Entrance', 'The Stable', 'Secret Garden', 'Pringle Staff Housing', 'Rifle Range', 'Pringle Centre', 'Main Entrance', 'Dining Hall', 'Chalmers East', 'CCF Hut', 'Laidlaw South']
+<br>
+Directions: Laidlaw South ---> CCF Hut ---> Chalmers East ---> Dining Hall ---> Main Entrance ---> Pringle Centre ---> Rifle Range ---> Pringle Staff Housing ---> Secret Garden ---> The Stable ---> School Entrance
+<br>
+Distance: 560m
+<br>
+Estimated time: 400.0s
+<br>
+Estimated time: 0:06:40mins
+<form action="/pdf">
+    <button id="stat-btn" class="btn">Print</button>
+  </form>
+
+
+  <div> 
+    {% load static %} <img src="{% static 'map/media/MerchiMap.jpg' %}" alt="map" style="width:1000px;height:700px;">
+  </div>
+{% endblock content%}
+
+<form action="/save">
+  <button id="stat-btn" class="btn">Save</button>
+</form>

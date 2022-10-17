@@ -15,7 +15,10 @@ urlpatterns = [
     path('zezo/',views.zezo),
     path('result/',views.result),
     path('adder/<int:num>/', views.adder),
-    path('pdf', views.pdf)
+    path('pdf', views.pdf),
+    path('saved/', views.saved, name='blog-saved'),
+    path('save/',views.save),
+    path('test2/', views.test2)
 ]
 
 urlpatterns += staticfiles_urlpatterns()

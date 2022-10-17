@@ -7,9 +7,25 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.http import FileResponse
 import io
-import reportlab.pdfgen import canvas
+from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
+from map.forms import *
+from textwrap import wrap
+
+def results(request):
+    #Dijkstra function here
+    return render(request, result.html)
+
+def saved(request):
+    return render(request, 'saved.html', {'title': 'About'})
+
+def save(request):
+  src = request.POST.get('start')
+  dest = request.POST.get('end')
+  src.save
+  dest.save
+  return(render(request(saved.html)))
 
 def pdf(request):
     #creating Bytestream Buffer
@@ -19,18 +35,17 @@ def pdf(request):
     #creating a text object
     textob = c.beginText()
     textob.setTextOrigin(inch,inch)
-    textob.setFont("Helvectica", 14)
+    textob.setFont("Helvetica", 14)
 
     content = [
-        "blah"
-        "blah"
+        "Locations"
     ]
-
-    for line in lines:
+    wrapped_text = "\n".join(wrap(content, 80))
+    content(wrapped_text)
+    for line in content:
         textob.textLine(line)
 
     c.drawText(textob)
-    c.showpage()
     c.save()
     buf.seek(0)
 
@@ -42,8 +57,11 @@ def collect():
     return HttpResponse('<h1>ha</h1>')
 
 def home(request):
-    request.session['one'] = 1
-    request.session['two'] = 2
+    #form = InputForm(request.POST)
+    #if form.isvalid():
+      #  start = form.save()
+     #   start.save()
+   # context = {'form': form, 'start': start}
     return render(request, 'home.html')
 
 def adder(request, num):
@@ -102,8 +120,17 @@ def saveCriteria(request):
 def test(request):
     response = HttpResponse("HELP")
     response.set_cookie('name', "Rigatoni")
+    
     return HttpResponse(request, "test.html")
 
+def test2(request):
+    person = request.session.get("username")
+    weather= "sunny"
+    context= {
+        'person': person,
+        'weather': weather,
+        }
+    return render(request, 'test2.html', context)
 
 
 def zezo(request):
@@ -315,4 +342,7 @@ def dijkstra(request):
 
 
 def result(request):
+    return render(request, 'saved.html')
+
+def saved(request):
     return render(request, 'result.html')
